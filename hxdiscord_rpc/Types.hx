@@ -32,6 +32,10 @@ extern class DiscordRichPresence
 	var joinSecret:cpp.ConstCharStar; /* max 128 bytes */
 	var spectateSecret:cpp.ConstCharStar; /* max 128 bytes */
 	var instance:cpp.Int8;
+	var button1Label:cpp.ConstCharStar; /* max 32 bytes */
+	var button1Url:cpp.ConstCharStar; /* max 512 bytes */
+	var button2Label:cpp.ConstCharStar; /* max 32 bytes */
+	var button2Url:cpp.ConstCharStar; /* max 512 bytes */
 }
 
 @:buildXml('<include name="${haxelib:hxdiscord_rpc}/project/Build.xml" />')
@@ -48,6 +52,10 @@ extern class DiscordUser
 	var username:cpp.ConstCharStar;
 	var discriminator:cpp.ConstCharStar;
 	var avatar:cpp.ConstCharStar;
+	var globalName:cpp.ConstCharStar;
+	var bot:Bool;
+	var flags:Int;
+	var premium:Int;
 }
 
 @:buildXml('<include name="${haxelib:hxdiscord_rpc}/project/Build.xml" />')
