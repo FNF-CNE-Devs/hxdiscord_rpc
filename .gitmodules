@@ -1,5 +1,5 @@
 [submodule "project/discord-rpc-custom"]
-	path = project/discord-rpc
+	path = project/discord-rpc-custom
 	url = https://github.com/NeeEoo/discord-rpc.git
 [submodule "project/rapidjson"]
 	path = project/rapidjson
