@@ -52,10 +52,10 @@ extern class DiscordUser
 	var username:cpp.ConstCharStar;
 	var discriminator:cpp.ConstCharStar;
 	var avatar:cpp.ConstCharStar;
-	var globalName:cpp.ConstCharStar;
+	var global_name:cpp.ConstCharStar;
 	var bot:Bool;
 	var flags:Int;
-	var premium:Int;
+	var premium_type:Int;
 }
 
 @:buildXml('<include name="${haxelib:hxdiscord_rpc}/project/Build.xml" />')
