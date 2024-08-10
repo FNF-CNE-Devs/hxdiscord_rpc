@@ -85,4 +85,5 @@ extern class DiscordEventHandlers
 	var joinGame:cpp.Callable<(joinSecret:cpp.ConstCharStar) -> Void>;
 	var spectateGame:cpp.Callable<(spectateSecret:cpp.ConstCharStar) -> Void>;
 	var joinRequest:cpp.Callable<(request:cpp.RawConstPointer<DiscordUser>) -> Void>;
+	var anyResponse:cpp.Callable<(data:cpp.ConstCharStar) -> Void>;
 }
