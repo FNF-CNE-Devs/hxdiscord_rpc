@@ -36,6 +36,17 @@ extern class DiscordRichPresence
 	var button1Url:cpp.ConstCharStar; /* max 512 bytes */
 	var button2Label:cpp.ConstCharStar; /* max 32 bytes */
 	var button2Url:cpp.ConstCharStar; /* max 512 bytes */
+	var activityType:ActivityType;
+	var streamUrl:cpp.ConstCharStar; /* max 512 bytes */
+}
+
+enum abstract ActivityType(Int) from Int to Int
+{
+	var Playing = 0;
+	var Streaming = 1;
+	var Listening = 2;
+	var Watching = 3;
+	var Competing = 5;
 }
 
 @:buildXml('<include name="${haxelib:hxdiscord_rpc}/project/Build.xml" />')
