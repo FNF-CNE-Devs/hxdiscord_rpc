@@ -32,6 +32,9 @@ extern class Discord
 	@:native('Discord_Shutdown')
 	static function Shutdown():Void;
 
+	@:native('Discord_SetDebugMode')
+	static function SetDebugMode(debug:Bool):Void;
+
 	@:native('Discord_SendCustomCommand')
 	static function SendCustomCommand(command:cpp.ConstCharStar):Void;
 
