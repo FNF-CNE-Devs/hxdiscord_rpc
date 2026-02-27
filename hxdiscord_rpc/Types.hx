@@ -92,6 +92,12 @@ extern enum abstract DiscordActivityType(DiscordActivityType_Impl)
 	var DiscordActivityType_Playing;
 
 	/**
+	 * The activity is streaming.
+	 */
+	@:native('DiscordActivityType_Streaming')
+	var DiscordActivityType_streaming;
+
+	/**
 	 * The activity is listening to music.
 	 */
 	@:native('DiscordActivityType_Listening')
@@ -285,6 +291,11 @@ extern class DiscordRichPresence
 	var spectateSecret:cpp.ConstCharStar;
 
 	/**
+	 * URL for stream or whatever.
+	 */
+	var streamUrl:cpp.ConstCharStar;
+
+	/**
 	 * Whether this is an instance of the rich presence.
 	 */
 	var instance:Bool;
@@ -385,4 +396,9 @@ extern class DiscordEventHandlers
 	 * Callback for when the client receives a join request.
 	 */
 	var joinRequest:cpp.Callable<(request:cpp.RawConstPointer<DiscordUser>) -> Void>;
+
+	/**
+	 * Callback for any responses.
+	 */
+	var anyResponse:cpp.Callable<(data:cpp.ConstCharStar) -> Void>;
 }

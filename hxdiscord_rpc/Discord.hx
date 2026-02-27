@@ -104,4 +104,12 @@ extern class Discord
 	 */
 	@:native('Discord_UpdateHandlers')
 	static function UpdateHandlers(handlers:cpp.RawPointer<DiscordEventHandlers>):Void;
+
+	/**
+	 * Sends a custom command.
+	 * 
+	 * @param command
+	 */
+	@:native('Discord_SendCustomCommand')
+	static function SendCustomCommand(command:cpp.ConstCharStar):Void;
 }

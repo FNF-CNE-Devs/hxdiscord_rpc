@@ -22,8 +22,10 @@ typedef enum DiscordActivityPartyPrivacy
 typedef enum DiscordActivityType
 {
 	DiscordActivityType_Playing = 0,
+	DiscordActivityType_Streaming = 1,
 	DiscordActivityType_Listening = 2,
 	DiscordActivityType_Watching = 3,
+	//DiscordActivityType_ = 4,
 	DiscordActivityType_Competing = 5
 } DiscordActivityType;
 
@@ -60,6 +62,7 @@ typedef struct DiscordRichPresence
 	const char *joinSecret;
 	const char *spectateSecret;
 	bool instance;
+	const char *streamUrl;
 } DiscordRichPresence;
 
 typedef struct DiscordUser
@@ -81,6 +84,7 @@ typedef struct DiscordEventHandlers
 	void (*joinGame)(const char *joinSecret);
 	void (*spectateGame)(const char *spectateSecret);
 	void (*joinRequest)(const DiscordUser *request);
+	void (*anyResponse)(const char* data);
 } DiscordEventHandlers;
 
 void Discord_Register(const char *applicationId, const char *command);
@@ -95,3 +99,4 @@ void Discord_UpdatePresence(const DiscordRichPresence *presence);
 void Discord_ClearPresence(void);
 void Discord_Respond(const char *userid, DiscordActivityJoinRequestReply reply);
 void Discord_UpdateHandlers(DiscordEventHandlers *handlers);
+void Discord_SendCustomCommand(const char* data);

@@ -40,6 +40,7 @@ struct User
 	char avatar[128];
 	DiscordPremiumType premiumType;
 	bool bot;
+	int flags;
 };
 
 static RpcConnection *Connection{nullptr};
@@ -158,6 +159,10 @@ static void Discord_UpdateConnection(void)
 
 			if (!Connection->Read(message))
 				break;
+
+
+			if (Handlers.anyResponse)
+				Handlers.anyResponse(Stringify(message));
 
 			const char *evtName = GetStrMember(&message, "evt");
 			const char *nonce = GetStrMember(&message, "nonce");
@@ -361,6 +366,11 @@ void Discord_Initialize(const char *applicationId, DiscordEventHandlers *handler
 
 			if (bot)
 				connectedUser.bot = bot;
+
+			auto flags = GetIntMember(user, "flags");
+
+			if (flags)
+				connectedUser.flags = flags;
 		}
 
 		WasJustConnected.exchange(true);
@@ -434,6 +444,19 @@ void Discord_Respond(const char *userId, DiscordActivityJoinRequestReply reply)
 	}
 }
 
+void Discord_SendCustomCommand(const char* data)
+{
+    auto qmessage = SendQueue.GetNextAddMessage();
+    if (qmessage) {
+        char buffer[16384];
+        strcpy(buffer, data);
+        strcpy(qmessage->buffer, buffer);
+        qmessage->length = strlen(buffer);
+        SendQueue.CommitAdd();
+        SignalIOActivity();
+    }
+}
+
 void Discord_RunCallbacks(void)
 {
 	if (!Connection)
@@ -462,7 +485,8 @@ void Discord_RunCallbacks(void)
 				       connectedUser.discriminator,
 				       connectedUser.avatar,
 				       connectedUser.premiumType,
-				       connectedUser.bot};
+				       connectedUser.bot,
+				       connectedUser.flags};
 
 			Handlers.ready(&du);
 		}
